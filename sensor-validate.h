@@ -21,10 +21,12 @@ struct SensorProp_s
 {
 	char name[10];
 	double tolerance;
-}SensorProperties[NUMSENSOR];
+};
 
-struct SensorProp_s SensorProperties[SOC] = {"SoC" , TOLERANCE_SOC};
-struct SensorProp_s SensorProperties[CURRENT] = {"Current" , TOLERANCE_CURRENT};
+struct SensorProp_s SensorProperties[NUMSENSOR] = {
+												   {"SoC" , TOLERANCE_SOC},
+												   {"Curent" , TOLERANCE_CURRENT}};
+
 
 /*****************************************/
 
