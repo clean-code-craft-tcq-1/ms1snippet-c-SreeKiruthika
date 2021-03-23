@@ -3,6 +3,10 @@
 #include "test/catch.hpp"
 #include "sensor-validate.h"
 
+struct SensorProp_s SensorProperties[NUMSENSOR] = {
+												   {"SoC" , TOLERANCE_SOC},
+												   {"Curent" , TOLERANCE_CURRENT}};
+
 /* Test for noisy SOC sensor*/
 TEST_CASE("reports error when soc jumps abruptly") 
 {

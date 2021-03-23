@@ -23,10 +23,6 @@ struct SensorProp_s
 	double tolerance;
 };
 
-struct SensorProp_s SensorProperties[NUMSENSOR] = {
-												   {"SoC" , TOLERANCE_SOC},
-												   {"Curent" , TOLERANCE_CURRENT}};
-
 
 /*****************************************/
 
