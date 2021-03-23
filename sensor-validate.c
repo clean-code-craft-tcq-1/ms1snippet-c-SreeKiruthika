@@ -1,28 +1,65 @@
 #include "sensor-validate.h"
 
-int _give_me_a_good_name(double value, double nextValue, double maxDelta) {
-  if(nextValue - value > maxDelta) {
+/****************************************************************************************
+*Func desc : This function checks if the consecutive sensor readings are within tolerance 
+*Param     : value - The measured battery parameter value, whole limits are to be verified - float type
+*Return    : Returns the status of param limit check
+			 0 - Sensor readings not within tolerance
+			 1 - Sensor readings within tolerance
+*****************************************************************************************/
+int IsWithinTolerance(double value, double nextValue, double tolerance) 
+{
+  if(fabs(nextValue - value) > maxDelta))
+  {
     return 0;
   }
   return 1;
 }
 
-int validateSOCreadings(double* values, int numOfValues) {
-  int lastButOneIndex = numOfValues - 1;
-  for(int i = 0; i < lastButOneIndex; i++) {
-    if(!_give_me_a_good_name(values[i], values[i + 1], 0.05)) {
-      return 0;
+/****************************************************************************************
+*Func desc : This function checks if the sensor is faulty based on the sensor readings
+*Param     : sensorReading - pointer to the array that holds the sensor readings  - double
+             numOfReadings - Number of readings recorded from the sensor          - int  
+			 Sensor        - structure which holds sensor details                 - struct SensorProp_s
+*Return    : Returns the validated status of sensor readings
+			 0 - Sensor readings are NOT OK
+			 1 - Sensor readings are OK
+*****************************************************************************************/
+int validateSensorReadings(double* sensorReading, int numOfReadings, struct SensorProp_s Sensor) 
+{
+    if ((numOfReadings == 0)||(sensorReading == NULL))
+    {
+       printf("%s sensor readings not available",Sensor.name);
+	   return NAN;
     }
-  }
-  return 1;
+    else
+    {  
+       int i = 0;
+  
+        while(i < (numOfReadings - 1))
+        {
+          if(!IsWithinTolerance(sensorReading[i], sensorReading[i + 1], Sensor.tolerance)) 
+	      {
+	        printf("%s sensor is noisy" , Sensor.name);	
+            return NOISY;
+          }
+	      i++;
+		}  
+		printf("%s sensor is noise-free" , Sensor.name);
+        return NOISE_FREE;
+    }
+  
 }
 
-int validateCurrentreadings(double* values, int numOfValues) {
-  int lastButOneIndex = numOfValues - 1;
-  for(int i = 0; i < lastButOneIndex; i++) {
-    if(!_give_me_a_good_name(values[i], values[i + 1], 0.1)) {
-      return 0;
-    }
-  }
-  return 1;
+
+int NumOfReadingsFromSensor(double *readingsBuffer)
+{
+	if (readingsBuffer == NULL)
+	{
+		return 0;
+	}
+	else
+	{
+	  return (sizeof(readingsBuffer) / sizeof(readingsBuffer[0]));
+	}
 }
