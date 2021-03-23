@@ -29,9 +29,9 @@ TEST_CASE("reports error when soc drops abruptly")
 
 /* Test for no readings from SOC sensor*/
 TEST_CASE("reports error when soc jumps abruptly") {
-  double socReadings = NULL;
+  double *socReadings = NULL;
   int numOfSocReadings = NumOfReadingsFromSensor(socReadings) ;
-  REQUIRE(validateSensorReadings(socReadings, numOfSocReadings,SensorProperties[SOC]) == NAN);
+  REQUIRE(validateSensorReadings(socReadings, numOfSocReadings,SensorProperties[SOC]) == INVALID_DATA);
 }
 /* Test for noisy Current sensor*/
 TEST_CASE("reports error when current jumps abruptly") {

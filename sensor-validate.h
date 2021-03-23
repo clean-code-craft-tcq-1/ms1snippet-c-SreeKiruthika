@@ -8,7 +8,7 @@
 /***************DEFINES section *****************************/
 #define TOLERANCE_SOC      0.05
 #define TOLERANCE_CURRENT  0.1
-#define INVALID_DATA       NAN 
+#define INVALID_DATA       255 
 #define NOISY              0
 #define NOISE_FREE         1
 
@@ -23,8 +23,8 @@ struct SensorProp_s
 	double tolerance;
 }SensorProperties[NUMSENSOR];
 
-extern const struct SensorProperties[SOC] = {"SoC" , TOLERANCE_SOC};
-extern const struct SensorProperties[CURRENT] = {"Current" , TOLERANCE_CURRENT};
+struct SensorProperties[SOC] = {"SoC" , TOLERANCE_SOC};
+struct SensorProperties[CURRENT] = {"Current" , TOLERANCE_CURRENT};
 
 /*****************************************/
 
