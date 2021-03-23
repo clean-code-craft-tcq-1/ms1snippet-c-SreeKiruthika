@@ -9,7 +9,7 @@
 *****************************************************************************************/
 int IsWithinTolerance(double value, double nextValue, double tolerance) 
 {
-  if(fabs(nextValue - value) > maxDelta))
+  if(fabs(nextValue - value) > tolerance)
   {
     return 0;
   }
@@ -30,7 +30,7 @@ int validateSensorReadings(double* sensorReading, int numOfReadings, struct Sens
     if ((numOfReadings == 0)||(sensorReading == NULL))
     {
        printf("%s sensor readings not available",Sensor.name);
-	   return NAN;
+	   return INVALID_DATA;
     }
     else
     {  
@@ -52,7 +52,7 @@ int validateSensorReadings(double* sensorReading, int numOfReadings, struct Sens
 }
 
 
-int NumOfReadingsFromSensor(double *readingsBuffer)
+int NumOfReadingsFromSensor(double readingsBuffer[])
 {
 	if (readingsBuffer == NULL)
 	{

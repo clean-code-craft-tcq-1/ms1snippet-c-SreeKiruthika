@@ -1,12 +1,14 @@
 /************************************************************************************************************************/
 /* This file contains the inclusions and definitions needed for sensor validation*/
 /************************************************************************************************************************/
+
+#include <stdio.h>
 #include <math.h>
 
 /***************DEFINES section *****************************/
 #define TOLERANCE_SOC      0.05
 #define TOLERANCE_CURRENT  0.1
-#define NAN                sqrt(-1) 
+#define INVALID_DATA       NAN 
 #define NOISY              0
 #define NOISE_FREE         1
 
@@ -21,8 +23,8 @@ struct SensorProp_s
 	double tolerance;
 }SensorProperties[NUMSENSOR];
 
-extern const SensorProperties[SOC] = {"SoC" , TOLERANCE_SOC};
-extern const SensorProperties[CURRENT] = {"Current" , TOLERANCE_CURRENT};
+extern const struct SensorProperties[SOC] = {"SoC" , TOLERANCE_SOC};
+extern const struct SensorProperties[CURRENT] = {"Current" , TOLERANCE_CURRENT};
 
 /*****************************************/
 
@@ -32,4 +34,5 @@ int IsWithinTolerance(double value, double nextValue, double tolerance);
 
 int validateSensorReadings(double* sensorReading, int numOfReadings, struct SensorProp_s Sensor);
 
+int NumOfReadingsFromSensor(double readingsBuffer[]);
 /************************************************************/
