@@ -12,7 +12,6 @@ TEST_CASE("reports error no sensor data is read - Current sensor")
 {
   double *currentReadings = NULL;
   int numOfCurReadings = 0;
-  printf("\n%d", numOfCurReadings);
   REQUIRE(validateSensorReadings(currentReadings, numOfCurReadings, SensorProperties[CURRENT]) == INVALID_DATA);
 }
 
@@ -50,7 +49,6 @@ TEST_CASE("noise less readings - Soc sensor")
 {
   double socReadings[] = {0.08, 0.05, 0.1, 0.06, 0.09};
   int numOfSocReadings = sizeof(socReadings) / sizeof(socReadings[0]);
-  printf("\n%d", numOfSocReadings);
   REQUIRE(validateSensorReadings(socReadings, numOfSocReadings,SensorProperties[SOC]) == NOISE_FREE);
 }
 
