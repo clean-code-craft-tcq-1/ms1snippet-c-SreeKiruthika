@@ -30,7 +30,7 @@ TEST_CASE("noise less readings - Current sensor")
   REQUIRE(validateSensorBasedOnReadings(currentReadings, numOfCurReadings, SensorProperties[CURRENT]) == NOISE_FREE);
 }
 
-TEST_CASE("reports error when current jumps abruptly - Current sensor")  
+TEST_CASE("reports error when current drops abruptly - Current sensor")  
 {
   double currentReadings[] = {0.0, 0.02, 0.03, 0.04, 0.14, 0.16,0.05};
   int numOfCurReadings = sizeof(currentReadings) / sizeof(currentReadings[0]);
