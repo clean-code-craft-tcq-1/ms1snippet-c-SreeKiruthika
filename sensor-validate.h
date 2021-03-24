@@ -9,6 +9,7 @@
 #define TOLERANCE_SOC      0.05
 #define TOLERANCE_CURRENT  0.1
 #define INVALID_DATA       255 
+#define VALID_DATA         0
 #define NOISY              0
 #define NOISE_FREE         1
 
@@ -31,6 +32,8 @@ struct SensorProp_s
 int IsWithinTolerance(double value, double nextValue, double tolerance);
 
 int validateSensorReadings(double* sensorReading, int numOfReadings, struct SensorProp_s Sensor);
+
+int validateSensorBasedOnReadings(double* sensorReading, int numOfReadings, struct SensorProp_s Sensor);
 
 int NumOfReadingsFromSensor(double readingsBuffer[]);
 /************************************************************/

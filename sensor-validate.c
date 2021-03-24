@@ -27,30 +27,48 @@ int IsWithinTolerance(double value, double nextValue, double tolerance)
 *****************************************************************************************/
 int validateSensorReadings(double* sensorReading, int numOfReadings, struct SensorProp_s Sensor) 
 {
-    if ((numOfReadings == 0)||(sensorReading == NULL))
-    {
-       printf("%s sensor readings not available",Sensor.name);
-	   return INVALID_DATA;
-    }
-    else
-    {  
        int i = 0;
   
         while(i < (numOfReadings - 1))
         {
           if(!IsWithinTolerance(sensorReading[i], sensorReading[i + 1], Sensor.tolerance)) 
 	      {
-	        printf("%s sensor is noisy" , Sensor.name);	
+	        printf("\n%s sensor is noisy, sudden jump detected between reading %d and %d" , Sensor.name,i+1,i+2);	
             return NOISY;
           }
 	      i++;
 		}  
-		printf("%s sensor is noise-free" , Sensor.name);
+		printf("\n%s sensor is noise-free" , Sensor.name);
         return NOISE_FREE;
-    }
+    
   
 }
 
+int isDataValid((double* sensorReading, int numOfReadings)
+{
+	if ((numOfReadings == 0)||(sensorReading == NULL))
+    {
+       return INVALID_DATA;
+    }
+	return VALID_DATA;
+}
+
+validateSensorBasedOnReadings(double* sensorReading, int numOfReadings, struct SensorProp_s Sensor)
+{
+	int retval;
+	
+	if(isDataValid(sensorReading,numOfReadings)!=INVALID_DATA)
+	{
+		retval =  validateSensorReadings(sensorReading,numOfReadings,Sensor);
+	}
+	else
+	{
+		printf("\n%s sensor readings not available",Sensor.name);
+	   retval = INVALID_DATA;
+	}
+	return retval;
+}
+	
 
 int NumOfReadingsFromSensor(double readingsBuffer[])
 {

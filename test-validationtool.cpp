@@ -20,6 +20,7 @@ TEST_CASE("reports error when soc jumps abruptly,,both increase and decrease")
 {
   double socReadings[] = {0.08, 0.05, 0.1, 0.06, 0.09};
   int numOfSocReadings = NumOfReadingsFromSensor(socReadings);
+  printf("\n%d", numOfSocReadings);
   REQUIRE(validateSensorReadings(socReadings, numOfSocReadings,SensorProperties[SOC]) == NOISE_FREE);
 }
 
@@ -32,9 +33,10 @@ TEST_CASE("reports error when soc drops abruptly")
 }
 
 /* Test for no readings from SOC sensor*/
-TEST_CASE("reports error when soc jumps abruptly") {
+TEST_CASE("reports error no sensor data is read") {
   double *socReadings = NULL;
   int numOfSocReadings = NumOfReadingsFromSensor(socReadings) ;
+  printf("\n%d", numOfSocReadings);
   REQUIRE(validateSensorReadings(socReadings, numOfSocReadings,SensorProperties[SOC]) == INVALID_DATA);
 }
 /* Test for noisy Current sensor*/
