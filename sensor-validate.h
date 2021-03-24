@@ -30,12 +30,10 @@ struct SensorProp_s
 
 int IsWithinTolerance(double value, double nextValue, double tolerance);
 
+int IsSensorNoiseFree(double* sensorReading, int numOfReadings, struct SensorProp_s Sensor);
+
 int validateSensorReadings(double* sensorReading, int numOfReadings, struct SensorProp_s Sensor);
 
-int validateSensorBasedOnReadings(double* sensorReading, int numOfReadings, struct SensorProp_s Sensor);
-
-int NumOfReadingsFromSensor(double readingsBuffer[]);
-
-int isDataValid(double* sensorReading, int numOfReadings);
+int IsDataValid(double* sensorReading, int numOfReadings);
 
 /**************************************************************/

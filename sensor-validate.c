@@ -17,15 +17,15 @@ int IsWithinTolerance(double value, double nextValue, double tolerance)
 }
 
 /****************************************************************************************
-*Func desc : This function checks if the sensor is faulty based on the sensor readings
+*Func desc : This function checks if the sensor readings is noise free, this function assumes valid data is received
 *Param     : sensorReading - pointer to the array that holds the sensor readings  - double
              numOfReadings - Number of readings recorded from the sensor          - int  
 			 Sensor        - structure which holds sensor details                 - struct SensorProp_s
 *Return    : Returns the validated status of sensor readings
-			 0 - Sensor readings are NOT OK
-			 1 - Sensor readings are OK
+			 0 - Sensor is NOISY
+			 1 - Sensor is NOISE_FREE
 *****************************************************************************************/
-int validateSensorReadings(double* sensorReading, int numOfReadings, struct SensorProp_s Sensor) 
+int IsSensorNoiseFree(double* sensorReading, int numOfReadings, struct SensorProp_s Sensor) 
 {
 	    for(int i = 0;i < (numOfReadings - 1);i++)
         {
@@ -40,7 +40,15 @@ int validateSensorReadings(double* sensorReading, int numOfReadings, struct Sens
 
 }
 
-int isDataValid(double* sensorReading, int numOfReadings)
+/****************************************************************************************
+*Func desc : This function checks if the data received as sensor data is valid 
+*Param     : sensorReading - pointer to the array that holds the sensor readings  - double
+             numOfReadings - Number of readings recorded from the sensor          - int 
+*Return    : Returns the status of param limit check
+			 255 - Invalid sensor data
+			 0   - Valid sensor data
+*****************************************************************************************/
+int IsDataValid(double* sensorReading, int numOfReadings)
 {
 	if ((numOfReadings == 0)||(sensorReading == NULL))
     {
@@ -49,13 +57,22 @@ int isDataValid(double* sensorReading, int numOfReadings)
 	return VALID_DATA;
 }
 
-int validateSensorBasedOnReadings(double* sensorReading, int numOfReadings, struct SensorProp_s Sensor)
+/****************************************************************************************
+*Func desc : This function checks sensor validity based on the readings received from sensor
+*Param     : sensorReading - pointer to the array that holds the sensor readings  - double
+             numOfReadings - Number of readings recorded from the sensor          - int  
+			 Sensor        - structure which holds sensor details                 - struct SensorProp_s
+*Return    : Returns the validated status of sensor based readings
+			 0 - NOISE
+			 1 - Sensor readings are OK
+*****************************************************************************************/
+int validateSensorReadings(double* sensorReading, int numOfReadings, struct SensorProp_s Sensor)
 {
 	int retval;
 	
-	if(isDataValid(sensorReading,numOfReadings)!=INVALID_DATA)
+	if(IsDataValid(sensorReading,numOfReadings)!=INVALID_DATA)
 	{
-		retval =  validateSensorReadings(sensorReading,numOfReadings,Sensor);
+		retval =  IsSensorNoiseFree(sensorReading,numOfReadings,Sensor);
 	}
 	else
 	{
@@ -65,15 +82,3 @@ int validateSensorBasedOnReadings(double* sensorReading, int numOfReadings, stru
 	return retval;
 }
 	
-
-int NumOfReadingsFromSensor(double readingsBuffer[])
-{
-	if (readingsBuffer == NULL)
-	{
-		return 0;
-	}
-	else
-	{
-	  return (sizeof(readingsBuffer) / sizeof(readingsBuffer[0]));
-	}
-}
