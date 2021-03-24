@@ -44,7 +44,7 @@ int validateSensorReadings(double* sensorReading, int numOfReadings, struct Sens
   
 }
 
-int isDataValid((double* sensorReading, int numOfReadings)
+int isDataValid(double* sensorReading, int numOfReadings)
 {
 	if ((numOfReadings == 0)||(sensorReading == NULL))
     {
@@ -53,7 +53,7 @@ int isDataValid((double* sensorReading, int numOfReadings)
 	return VALID_DATA;
 }
 
-validateSensorBasedOnReadings(double* sensorReading, int numOfReadings, struct SensorProp_s Sensor)
+int validateSensorBasedOnReadings(double* sensorReading, int numOfReadings, struct SensorProp_s Sensor)
 {
 	int retval;
 	

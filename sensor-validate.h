@@ -36,4 +36,6 @@ int validateSensorReadings(double* sensorReading, int numOfReadings, struct Sens
 int validateSensorBasedOnReadings(double* sensorReading, int numOfReadings, struct SensorProp_s Sensor);
 
 int NumOfReadingsFromSensor(double readingsBuffer[]);
+
+int isDataValid(double* sensorReading, int numOfReadings);
 /************************************************************/
