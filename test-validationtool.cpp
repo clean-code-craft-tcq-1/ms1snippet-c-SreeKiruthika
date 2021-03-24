@@ -25,7 +25,7 @@ TEST_CASE("reports error when current jumps abruptly - Current sensor")
 
 TEST_CASE("noise less readings - Current sensor") 
 {
-  double currentReadings[] = {0.0, 0.02, 0.03, 0.04, 0.14, 0.16,0.8};
+  double currentReadings[] = {0.0, 0.02, 0.03, 0.04, 0.14, 0.16,0.11};
   int numOfCurReadings = sizeof(currentReadings) / sizeof(currentReadings[0]);
   REQUIRE(validateSensorBasedOnReadings(currentReadings, numOfCurReadings, SensorProperties[CURRENT]) == NOISE_FREE);
 }
@@ -41,7 +41,7 @@ TEST_CASE("reports error when current drops abruptly - Current sensor")
 /* Test for noisy SOC sensor*/
 TEST_CASE("reports error when soc jumps abruptly - SoC sensor") 
 {
-  double socReadings[] = {0.0, 0.01, 0.5, 0.51};
+  double socReadings[] = {0.0, 0.01, 1.5, 0.51};
   int numOfSocReadings = NumOfReadingsFromSensor(socReadings);
   REQUIRE(validateSensorBasedOnReadings(socReadings, numOfSocReadings,SensorProperties[SOC]) == NOISY);
 }
