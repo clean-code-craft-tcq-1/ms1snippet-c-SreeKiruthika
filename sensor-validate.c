@@ -27,16 +27,13 @@ int IsWithinTolerance(double value, double nextValue, double tolerance)
 *****************************************************************************************/
 int validateSensorReadings(double* sensorReading, int numOfReadings, struct SensorProp_s Sensor) 
 {
-       int i = 0;
-  
-        while(i < (numOfReadings - 1))
+        for(int i = 0;i < (numOfReadings - 1);i++)
         {
           if(!IsWithinTolerance(sensorReading[i], sensorReading[i + 1], Sensor.tolerance)) 
 	      {
 	        printf("\n%s sensor is noisy, sudden jump detected between reading %d and %d" , Sensor.name,i+1,i+2);	
             return NOISY;
           }
-	      i++;
 		}  
 		printf("\n%s sensor is noise-free" , Sensor.name);
         return NOISE_FREE;

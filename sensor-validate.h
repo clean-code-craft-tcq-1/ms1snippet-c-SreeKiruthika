@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <math.h>
 
-/***************DEFINES section *****************************/
+/***************DEFINES section ******************************/
 #define TOLERANCE_SOC      0.05
 #define TOLERANCE_CURRENT  0.1
 #define INVALID_DATA       255 
@@ -13,9 +13,9 @@
 #define NOISY              0
 #define NOISE_FREE         1
 
-/************************************************************/
+/*************************************************************/
 
-/*******Global variables declaration*******/
+/***************** Global variables declaration***************/
 enum SENSOR_TYPE {SOC, CURRENT, NUMSENSOR};
 
 struct SensorProp_s
@@ -24,8 +24,7 @@ struct SensorProp_s
 	double tolerance;
 };
 
-
-/*****************************************/
+/**************************************************************/
 
 /**************Function prototype section**********************/
 
@@ -38,4 +37,5 @@ int validateSensorBasedOnReadings(double* sensorReading, int numOfReadings, stru
 int NumOfReadingsFromSensor(double readingsBuffer[]);
 
 int isDataValid(double* sensorReading, int numOfReadings);
-/************************************************************/
+
+/**************************************************************/
